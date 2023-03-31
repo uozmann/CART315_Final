@@ -10,6 +10,7 @@ public class NpcBehaviour : MonoBehaviour
     public bool repeatMessage = false;
     public bool lookAtPlayer = false;
     bool touchedNpc = false;
+    public GameObject ChoiceManager;
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +33,7 @@ public class NpcBehaviour : MonoBehaviour
             {
                 trigger.StartDialogue();               
                 touchedNpc = true;
+                /*ChoiceManager.GetComponent<ChoiceManager>().currentNpc = this.gameObject;*/
             }
             else if (dist > 2 && touchedNpc == true && repeatMessage == true)
             {
