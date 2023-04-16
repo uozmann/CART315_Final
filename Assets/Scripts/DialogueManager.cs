@@ -48,6 +48,7 @@ public class DialogueManager : MonoBehaviour
             isActive = false;
             Debug.Log("End of conversation ");
             FindObjectOfType<CameraBehaviours>().OffDialogue();
+            FindObjectOfType<EyeAnimation>().BlackOut();
         }
     }
     void TextTransition()

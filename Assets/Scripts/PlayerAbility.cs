@@ -6,20 +6,42 @@ using UnityEngine.SceneManagement;
 
 public class PlayerAbility : MonoBehaviour
 {
-    public int stepperCollected { get; private set; }
-    public int keyCollected { get; private set; }
+    /*public int stepperCollected;
+    public int keyCollected;
     public bool undergroundUnlocked = false;
-    public TextMeshProUGUI numberStepper;
+    public string tempState;
+    public string worldState;
+    public string playerState;
+    public GameObject currentNpc;
+    public GameObject previousNpc;*/
+
     public GameObject stepperPrefab;
-    private GameObject finalDestination;
+    private GameObject stateManager;
+ /*   private int stepperCollected;
+    private int keyCollected;
+    private bool undergroundUnlocked;*/
     private GameObject floor;
+    /*   private static bool spawned = false;
+
+       void Awake()
+       {
+           if (spawned == false)
+           {
+               spawned = true;
+               DontDestroyOnLoad(gameObject);
+           }
+           else
+           {
+               DestroyImmediate(gameObject); 
+           }
+       }*/
 
     // Start is called before the first frame update
     void Start()
     {
         gameObject.GetComponent<FlyBehaviour>().enabled = false;
-        finalDestination = GameObject.Find("SNature_LiliBlossom (1)");
         floor = GameObject.Find("Separationborder");
+        stateManager = GameObject.Find("stateController");
     }
 
     // Update is called once per frame
@@ -27,24 +49,23 @@ public class PlayerAbility : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
-            if (stepperCollected > 0)
+            if (stateManager.GetComponent<StateManager>().stepperCollected > 0)
             {
                 Instantiate(stepperPrefab, transform.position + (transform.forward * 2), transform.rotation);
-                stepperCollected--;
-                numberStepper.text = stepperCollected.ToString();
+                stateManager.GetComponent<StateManager>().stepperDecounter();
             }
-            else if (stepperCollected <= 0 && undergroundUnlocked)
+            else if (stateManager.GetComponent<StateManager>().stepperCollected <= 0 && stateManager.GetComponent<StateManager>().undergroundUnlocked)
             {
                 gameObject.GetComponent<FlyBehaviour>().enabled = true;
             } 
-            if (keyCollected <= 0)
+            if (stateManager.GetComponent<StateManager>().keyCollected <= 0)
             {
                 floor.GetComponent<BoxCollider>().enabled = true;
             }
             
         }
     }
-
+/*
     public void stepperCounter()
     {
         stepperCollected++;
@@ -60,13 +81,15 @@ public class PlayerAbility : MonoBehaviour
         keyCollected++;
         if (keyCollected >= 2)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            keyDecounter();
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            this.transform.position = new Vector3(-3, 0, -11);
         }
         Debug.Log(keyCollected);
     }
     public void keyDecounter()
     {
-        keyCollected--;
+        keyCollected = 0;
     }
     public void unlockCounter()
     {
@@ -74,6 +97,5 @@ public class PlayerAbility : MonoBehaviour
     }
     public void updateUI()
     {
-        numberStepper.text = stepperCollected.ToString();
-    }
+    }*/
 }

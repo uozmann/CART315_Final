@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Collectibles : MonoBehaviour
 {
@@ -13,6 +13,7 @@ public class Collectibles : MonoBehaviour
     public bool transporter;
 
     int keyCollected;
+    private GameObject stateManager;
 
     // Start is called before the first frame update
     void Start()
@@ -20,7 +21,8 @@ public class Collectibles : MonoBehaviour
         player = GameObject.Find("doctor");
         floor = GameObject.Find("Separationborder");
         screenCover = GameObject.Find("Canvas/ScreenCover");
-        keyCollected = player.GetComponent<PlayerAbility>().keyCollected;
+        stateManager = GameObject.Find("stateController");
+        keyCollected = stateManager.GetComponent<StateManager>().keyCollected;
     }
 
     //Detect collisions between the GameObjects with Colliders attached
@@ -31,27 +33,27 @@ public class Collectibles : MonoBehaviour
         {
             if (stepper == true)
             {
-                player.GetComponent<PlayerAbility>().stepperCounter();
+                stateManager.GetComponent<StateManager>().stepperCounter();
                 gameObject.SetActive(false);
             }
             else if (key == true)
             {
-                player.GetComponent<PlayerAbility>().keyCounter();
+                stateManager.GetComponent<StateManager>().keyCounter();
                 gameObject.SetActive(false);
             }
             else if (transporter == true)
             {
-                keyCollected = player.GetComponent<PlayerAbility>().keyCollected;
-                if (keyCollected >= 1)
+                keyCollected = stateManager.GetComponent<StateManager>().keyCollected;
+                if (keyCollected == 1)
                 {
                     floor.GetComponent<BoxCollider>().enabled = false;
                     this.GetComponent<MeshCollider>().enabled = false;
-                    /*screenCover.GetComponent<Animation>().Play("blackOut");*/
-                    player.GetComponent<PlayerAbility>().keyDecounter();
-                    player.GetComponent<PlayerAbility>().unlockCounter();
+                    stateManager.GetComponent<StateManager>().unlockCounter();
+                } else if (keyCollected == 2)
+                {
+                    stateManager.GetComponent<StateManager>().keyDecounter();
                 }
             }
-            player.GetComponent<PlayerAbility>().updateUI();
         }
     }
 

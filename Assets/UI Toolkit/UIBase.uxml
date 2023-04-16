@@ -1,0 +1,9 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/Scripts/BaseUI.uss?fileID=7433441132597879392&amp;guid=cb503680403329f47836de8c4146e060&amp;type=3#BaseUI" />
+    <ui:VisualElement name="Container">
+        <ui:IMGUIContainer name="ProfilePic" class="icon" style="background-image: none; width: auto; height: auto;">
+            <ui:Label text="Doctor" display-tooltip-when-elided="true" enable-rich-text="false" name="ProfileLabel" class="h1" style="background-image: none;" />
+        </ui:IMGUIContainer>
+    </ui:VisualElement>
+    <ui:ProgressBar title="my-progress" />
+</ui:UXML>
