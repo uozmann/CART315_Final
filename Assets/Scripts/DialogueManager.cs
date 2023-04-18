@@ -46,7 +46,6 @@ public class DialogueManager : MonoBehaviour
         {
             backgroundBox.LeanScale(Vector3.zero, 0.5f).setEaseOutExpo();
             isActive = false;
-            Debug.Log("End of conversation ");
             FindObjectOfType<CameraBehaviours>().OffDialogue();
             FindObjectOfType<EyeAnimation>().BlackOut();
         }

@@ -1,16 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class Collectibles : MonoBehaviour
 {
     GameObject player;
     GameObject floor;
     GameObject screenCover;
+    public GameObject stationChoice;
+    private bool stationChoiceTriggered = false;
     public bool stepper;
+    public GameObject stepperFlower;
     public bool key;
     public bool transporter;
+    public bool stationAssistant;
+    public GameObject assistantOnStation;
+/*    public AudioSource audioSfx;*/
 
     int keyCollected;
     private GameObject stateManager;
@@ -33,6 +38,7 @@ public class Collectibles : MonoBehaviour
         {
             if (stepper == true)
             {
+                stepperFlower.SetActive(true);
                 stateManager.GetComponent<StateManager>().stepperCounter();
                 gameObject.SetActive(false);
             }
@@ -51,11 +57,23 @@ public class Collectibles : MonoBehaviour
                     stateManager.GetComponent<StateManager>().unlockCounter();
                 } else if (keyCollected == 2)
                 {
-                    stateManager.GetComponent<StateManager>().keyDecounter();
+                    stateManager.GetComponent<StateManager>().nextScene();
+                }
+            } else if (stationAssistant == true)
+            {
+                if (!stationChoiceTriggered)
+                {
+                    stationChoice.SetActive(true);
+                    stateManager.GetComponent<StateManager>().assistantToInstall = assistantOnStation;
+                    FindObjectOfType<CameraBehaviours>().OnGateButton();
+                    stationChoiceTriggered = true;
+                } else if (stationChoiceTriggered)
+                {
                 }
             }
         }
     }
+    
 
 
 }

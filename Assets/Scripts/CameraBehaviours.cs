@@ -43,4 +43,14 @@ public class CameraBehaviours : MonoBehaviour
         player.GetComponent<MoveBehaviour>().runSpeed = 1.0f;
         player.GetComponent<MoveBehaviour>().sprintSpeed = 2.0f;
     }
+
+    public void OnGateButton()
+    {
+        cam1.GetComponent<ThirdPersonOrbitCamBasic>().enabled = false;
+    }
+
+    public void OffGateButton()
+    {
+        cam1.GetComponent<ThirdPersonOrbitCamBasic>().enabled = true;
+    }
 }

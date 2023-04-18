@@ -15,6 +15,7 @@ public class StateManager : MonoBehaviour
     public string playerState;
     public GameObject currentNpc;
     public GameObject previousNpc;
+    public GameObject assistantToInstall;
 
     void Awake()
     {
@@ -58,7 +59,7 @@ public class StateManager : MonoBehaviour
         if (keyCollected >= 2)
         {
             keyDecounter();
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            nextScene();
             this.transform.position = new Vector3(-3, 0, -11);
         }
         Debug.Log(keyCollected);
@@ -70,5 +71,20 @@ public class StateManager : MonoBehaviour
     public void unlockCounter()
     {
         undergroundUnlocked = !undergroundUnlocked;
+    }
+
+    public void nextScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    public void firstScene()
+    {
+        SceneManager.LoadScene(0);
+    }
+
+    public void quitGame()
+    {
+        Application.Quit();
     }
 }

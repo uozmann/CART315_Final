@@ -16,6 +16,7 @@ public class DialogueTrigger : MonoBehaviour
     {
         FindObjectOfType<DialogueManager>().OpenDialogue(messages, actors);
         FindObjectOfType<CameraBehaviours>().OnDialogue();
+        Debug.Log("StartDdialogue");
     }
 
     // Start is called before the first frame update

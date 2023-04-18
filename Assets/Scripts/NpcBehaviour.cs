@@ -31,10 +31,10 @@ public class NpcBehaviour : MonoBehaviour
             float dist = Vector3.Distance(player.position, transform.position);
             if (dist < 2 && touchedNpc == false)
             {
-                trigger.StartDialogue();               
+                trigger.StartDialogue();
+                Debug.Log("Trigger Called");
                 touchedNpc = true;
                 stateManager.GetComponent<StateManager>().currentNpc = this.gameObject;
-                Debug.Log("touched");
             }
             else if (dist > 2 && touchedNpc == true && repeatMessage == true)
             {

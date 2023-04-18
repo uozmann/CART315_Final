@@ -34,6 +34,27 @@ public class EyeAnimation : MonoBehaviour
          if (stateManager.GetComponent<StateManager>().currentNpc.name == "assistant01")
         {
             eyeAnimator.SetTrigger("TrigBlackOut");
+        } else if (stateManager.GetComponent<StateManager>().currentNpc.name == "assistant00")
+        {
+            StartCoroutine(LoadLevel());
         }
+        else if (stateManager.GetComponent<StateManager>().currentNpc.name == "body")
+        {
+            StartCoroutine(EndLevel());
+        }
+    }
+
+    IEnumerator LoadLevel()
+    {
+        eyeAnimator.SetTrigger("TrigClose");
+        yield return new WaitForSeconds(1);
+        stateManager.GetComponent<StateManager>().nextScene();
+    }
+
+    IEnumerator EndLevel()
+    {
+        eyeAnimator.SetTrigger("TrigClose");
+        yield return new WaitForSeconds(1);
+        stateManager.GetComponent<StateManager>().firstScene();
     }
 }
